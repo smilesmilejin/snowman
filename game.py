@@ -60,6 +60,14 @@ def snowman(snowman_word):
 
         # 7. The game prints out all of the incorrect letters that have been guessed
         print(f"Wrong guesses: {wrong_guesses_list}")
+
+
+    # for success function prints out: Congratulations, you win! for success 
+    # for failure print: Sorry, you lose! The word was {snowman_word}
+    if is_word_guessed(snowman_word, correct_letter_guess_statuses):
+        print('Congratulations, you win!')
+    else:
+        print(f'Sorry, you lose! The word was {snowman_word}')
         
 
 
