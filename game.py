@@ -34,7 +34,7 @@ def snowman(snowman_word):
     correct_letter_guess_statuses = build_letter_status_dict(snowman_word)
 
     # 8. The game loops back to asking the user to guess a letter and continues that pattern until either the user has guessed all of the letters in the word, or the snowman drawing is complete.
-    while (len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES) or (not is_word_guessed(snowman_word, correct_letter_guess_statuses)):
+    while (len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES) and (not is_word_guessed(snowman_word, correct_letter_guess_statuses)):
 
         # 3. User is prompted to guess a letter
         user_input = get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list)
