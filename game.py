@@ -20,50 +20,34 @@ def snowman(snowman_word):
     If the player wins and, 
     'Sorry, you lose! The word was {snowman_word}' if the player loses
     """
-    # pass
-    # 1. User starts the game from the command line
-    # 2. A secret word is selected
 
-
-    # Add a new list to track wrongly guessed letters
     wrong_guesses_list = []
 
-    ## Add a dict for snowman_word to track the guess statuses, the key value default is False
-    # Invoke build_letter_status_dict and pass in snowman_word as an argument. 
-    # Use variable called correct_letter_guess_statuses to capture the return value from calling the function.
+    # Add a dict for snowman_word to track the guess statuses, the key value default is False
     correct_letter_guess_statuses = build_letter_status_dict(snowman_word)
 
-    # 8. The game loops back to asking the user to guess a letter and continues that pattern until either the user has guessed all of the letters in the word, or the snowman drawing is complete.
-    while (len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES) and (not is_word_guessed(snowman_word, correct_letter_guess_statuses)):
+    # The game loops back to asking the user to guess a letter and continues that pattern until either the user has guessed all of the letters in the word, or the snowman drawing is complete.
+    while ((len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES) and 
+        (not is_word_guessed(snowman_word, correct_letter_guess_statuses))):
 
-        # 3. User is prompted to guess a letter
         user_input = get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list)
 
-        # 4. The game checks the letter to see if it is in the word
         if user_input in correct_letter_guess_statuses:
             print("You guessed a letter that's in the word!")
-            
-            # Before a correct guess, a key (represented by a letter) has a value set to False
-            # If the user's guess is correct, then we need to update correct_letter_guess_statuses dictionary, value become True
             correct_letter_guess_statuses[user_input] = True
 
-        # if the letter is NOT in the word
         else:
             print(f"The letter {user_input} is not in the word")
             wrong_guesses_list.append(user_input)
 
-        # 5. The game prints out a section of the snowman drawing, showing one level for each incorrectly guessed letter
         print_snowman_graphic(len(wrong_guesses_list))
 
-        # 6. The game prints out a hidden version of the word, where each correct letter is displayed and un-guessed letters are hidden
         print_word_progress_string(snowman_word, correct_letter_guess_statuses)
+        
+        wrong_guesses_output = ' '.join(wrong_guesses_list)
+        print(f"Wrong guesses: {wrong_guesses_output}")
 
-        # 7. The game prints out all of the incorrect letters that have been guessed
-        print(f"Wrong guesses: {wrong_guesses_list}")
 
-
-    # for success function prints out: Congratulations, you win! for success 
-    # for failure print: Sorry, you lose! The word was {snowman_word}
     if is_word_guessed(snowman_word, correct_letter_guess_statuses):
         print('Congratulations, you win!')
     else:
